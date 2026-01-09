@@ -1,0 +1,28 @@
+Harjoittelin tekoälyn kanssa json tiedostojen käyttöä
+Tällä tiedolla voin hallita paremmin pelin osia
+Voin mahdollisesti ottaa tämän roolin itselleni kun tiimi on valinnut minkälaisen pelin he valitsevat
+Uskon että tällä löydöllä voin paremmin työskennellä tiimin kanssa
+
+Ongelmana on vielä kuinka esitän suunnitelmani
+Voin toki kysyä mutten tiedä miten. Jos olen onnekas niin minun valinta äänestetään
+koska en itse tarvitse selittää mitä yritän saada aikaan
+
+Canvaksen harjoittelu vielä jatkuu. En ole vielä päässy hitbox testaukseen kun sain hyvän idean pelin rakenteelle
+Mutta jos hallitsen tämänkin niin meillä voi tulla hyvin vahva peli
+Ehkei tarvitse olla nätti mutta tärkeää on että se toimii hyvin ja on hauska pelata ja että näytetään yhteistyökykyiseltä tiimiltä
+
+Toivottavasti minun selitys jonka annan alle on riittävä jotta tiimi ymmärtää mitä yritän saavuttaa
+
+Data kansio on tietopankki
+
+Aivot.js kerää kaiken tämän tiedon. Ettei tulisi ongelmia haluan että kaikki asettaa jokaisen palan dataa oikeaan paikkaan ja nimeää uudet kategoriat oikein
+
+Grafiikka.css on tässä testissä vain scroll lukko eli estää sivua rullaamasta
+
+index.html on pää tiedosto joka toimii silmänä pelille. Se voisi sisältää aloitus ruudun mutta en ole vielä päättänyt siitä
+
+koodi.js on pelin sydän. Se kerää kaiken datan Aivot.js tiedostosta ja käyttää sitä Luomiseen ja pelin logiikkaan
+
+Tämä on vain harjoitus paikka mutta uskon että tämä on hyvä suunta mihin mennä jos minun ideani hyväksytään
+
+Terveisin Deadlyweather
