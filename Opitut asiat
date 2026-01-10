@@ -1,11 +1,12 @@
 Harjoittelin tekoälyn kanssa json tiedostojen käyttöä
 Tällä tiedolla voin hallita paremmin pelin osia
 Voin mahdollisesti ottaa tämän roolin itselleni kun tiimi on valinnut minkälaisen pelin he valitsevat
-Uskon että tällä löydöllä voin paremmin työskennellä tiimin kanssa
+Uskon että kaiken datan siirtäminen json tiedostoon on hyvä idea
+Silloin koodin kirjoittaminen on helpompaa ja tiimi keskittyä enemmän pelin logiikkaan. Riippuen tietenkin kuinka hyvin osaan tehdä tämän
 
 Ongelmana on vielä kuinka esitän suunnitelmani
-Voin toki kysyä mutten tiedä miten. Jos olen onnekas niin minun valinta äänestetään
-koska en itse tarvitse selittää mitä yritän saada aikaan
+Voin toki heiltä kysyä, mutten tiedä miten. Jos olen onnekas niin minun valinta äänestetään
+koska siinä aiheessa on paljon potentiaalia ja uskon että minulla on hyviä ideoita miten toteuttaa se
 
 Canvaksen harjoittelu vielä jatkuu. En ole vielä päässy hitbox testaukseen kun sain hyvän idean pelin rakenteelle
 Mutta jos hallitsen tämänkin niin meillä voi tulla hyvin vahva peli
@@ -15,7 +16,7 @@ Toivottavasti minun selitys jonka annan alle on riittävä jotta tiimi ymmärtä
 
 Data kansio on tietopankki
 
-Aivot.js kerää kaiken tämän tiedon. Ettei tulisi ongelmia haluan että kaikki asettaa jokaisen palan dataa oikeaan paikkaan ja nimeää uudet kategoriat oikein
+Aivot.js kerää kaiken Data kansion tiedon. Ettei ongelmia tulisi kaikki tulee asettaa dataa oikeasiin paikkoihin ja nimetään uudet kategoriat oikein
 
 Grafiikka.css on tässä testissä vain scroll lukko eli estää sivua rullaamasta
 

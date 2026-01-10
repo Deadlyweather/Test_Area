@@ -10,7 +10,7 @@ async function init() {
     const canvas = document.getElementById("TestArea");
     const ctx = canvas.getContext("2d");
 
-    // Näyttö
+    // Peli-ikkuna
     if (data.screen.size.useWindowSize) {
         canvas.width = window.innerWidth || data.screen.size.defaultWidth;
         canvas.height = window.innerHeight || data.screen.size.defaultHeight;
