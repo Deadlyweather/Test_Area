@@ -1,0 +1,19 @@
+{
+    "name": "Pelaaja",
+    "Main_stats": {
+        "health": 100,
+        "stamina": 20,
+        "mana": 10,
+        "level": 1,
+        "experience": 0,
+        "gold": 50
+    },
+    "Secondary_stats": {
+        "strength": 5,
+        "agility": 1,
+        "intelligence": 1,
+        "endurance": 0,
+        "vitality": 0,
+        "luck": 0
+    }
+}
