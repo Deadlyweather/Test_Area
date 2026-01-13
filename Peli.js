@@ -31,7 +31,7 @@ let Player = {
 let camera = {
     world: { x: 0, y: 0 },
     screen: { x: canvas.width / 2, y: canvas.height / 2 },
-    aim: { coord: { x: 0, y: 0 }, maxDistance: 200 }
+    aim: { coord: { x: 0, y: 0 }, maxDistance: 200, smooth: { x: 0, y: 0 }, smoothFactor: 0.1 }
 };
 
 // ============================================================================
@@ -74,8 +74,8 @@ function reload() {
 }
 
 function createBullet() {
-    const worldMouseX = Player.position.x + (mouse.x - camera.screen.x);
-    const worldMouseY = Player.position.y + (mouse.y - camera.screen.y);
+    const worldMouseX = Player.position.x + camera.aim.coord.x;
+    const worldMouseY = Player.position.y + camera.aim.coord.y;
 
     const dx = worldMouseX - Player.position.x;
     const dy = worldMouseY - Player.position.y;
@@ -101,7 +101,6 @@ function updateBullets() {
         b.y += b.vy;
         b.traveled += Math.sqrt(b.vx*b.vx + b.vy*b.vy);
 
-        // Bullet hits enemies
         for (let j = Enemies.length - 1; j >= 0; j--) {
             const e = Enemies[j];
             const dx = b.x - e.x;
@@ -160,7 +159,7 @@ function drawDamageFlash(entity) {
 }
 
 // ============================================================================
-//                               CAMERA AIM
+//                               CAMERA AIM (SMOOTH)
 // ============================================================================
 function Aim() {
     const dx = mouse.x - camera.screen.x;
@@ -170,11 +169,19 @@ function Aim() {
     let factor = 1;
     if (distance > camera.aim.maxDistance) factor = camera.aim.maxDistance / distance;
 
-    camera.aim.coord.x = dx * factor;
-    camera.aim.coord.y = dy * factor;
+    const targetX = dx * factor;
+    const targetY = dy * factor;
 
-    camera.world.x = Player.position.x + camera.aim.coord.x;
-    camera.world.y = Player.position.y + camera.aim.coord.y;
+    // Smooth interpolation (lerp)
+    camera.aim.smooth.x += (targetX - camera.aim.smooth.x) * camera.aim.smoothFactor;
+    camera.aim.smooth.y += (targetY - camera.aim.smooth.y) * camera.aim.smoothFactor;
+
+    camera.aim.coord.x = camera.aim.smooth.x;
+    camera.aim.coord.y = camera.aim.smooth.y;
+
+    // Kamera seuraa pelaajaa
+    camera.world.x = Player.position.x;
+    camera.world.y = Player.position.y;
 }
 
 // ============================================================================
@@ -216,9 +223,9 @@ function drawEnemies() {
 // ============================================================================
 //                               GRID & PLAYER
 // ============================================================================
-function Spawn(player) {
-    const screenX = camera.screen.x + (player.position.x - camera.world.x);
-    const screenY = camera.screen.y + (player.position.y - camera.world.y);
+function DrawPlayer(player) {
+    const screenX = camera.screen.x;
+    const screenY = camera.screen.y;
     ctx.fillStyle = player.appearance.color;
     ctx.beginPath();
     ctx.arc(screenX, screenY, player.appearance.size, 0, Math.PI*2);
@@ -226,21 +233,21 @@ function Spawn(player) {
     drawDamageFlash(player);
 }
 
-function GridMode(camera) {
+function DrawGrid() {
     ctx.strokeStyle = Grid.color;
     ctx.lineWidth = 1;
 
-    const startX = camera.world.x - camera.screen.x;
-    const startY = camera.world.y - camera.screen.y;
+    const offsetX = camera.world.x - camera.screen.x;
+    const offsetY = camera.world.y - camera.screen.y;
 
-    for (let x = startX % Grid.size; x < canvas.width; x += Grid.size) {
+    for (let x = -offsetX % Grid.size; x < canvas.width; x += Grid.size) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
         ctx.lineTo(x, canvas.height);
         ctx.stroke();
     }
 
-    for (let y = startY % Grid.size; y < canvas.height; y += Grid.size) {
+    for (let y = -offsetY % Grid.size; y < canvas.height; y += Grid.size) {
         ctx.beginPath();
         ctx.moveTo(0, y);
         ctx.lineTo(canvas.width, y);
@@ -279,6 +286,8 @@ function Update() {
         }
         if (dist < (Player.appearance.size + e.Size)/2) applyDamage(Player, e.Strength);
     });
+
+    updateBullets();
 }
 
 // ============================================================================
@@ -289,12 +298,11 @@ function GameLoop() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     Update();
-    updateBullets();
 
     if (Math.random() < 0.01) spawnEnemy();
 
-    GridMode(camera);
-    Spawn(Player);
+    DrawGrid();
+    DrawPlayer(Player);
     drawBullets();
     drawEnemies();
     drawTexts();
