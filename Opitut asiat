@@ -30,20 +30,10 @@ Terveisin Deadlyweather
 
 Päivä 2
 
-Yritin hallita json tiedostojen lataamista
-Mutta en ole vielä ymmärtänyt sitä täysin edes tekoälyn avustuksella
-Joten päätin muuttaa suunnitelmaani hieman
+Täysi muutos. Rakenne muuttuu takaisin kolmikoksi
 
-Suunitelmalleni tulee muutos. Unohdan json tiedostot projektin ajaksi
+Koodi.js -> Peli.js
 
-Joten rakenne tulee olemaan seuraava
+Poistettu Data + kaikki muut extrat
 
-Uudelleen nimeän tiedostot 
-    Aivot.js -> Data.js
-    koodi.js -> Peli.js
-
-Poistan Data kansion ja siirrän kaiken datan Data.js tiedostoon. Ehkä optimaalinen vaihtoehto tähän projektiin
-Uskon että onnistun paremmin tällä tavalla. Json tiedoston käyttöä ei muutenkaan ole opetettu
-
-Jouduin keksimään uuden tavan eliminoida monimutkaisen datan luomisen
-
+Harjoittelu jatkuu normaalisti
