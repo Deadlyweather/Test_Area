@@ -27,8 +27,9 @@ function CreateBackground() {
 // ============================================================================
 
 let images = {
-    Bar: "../Graphics/Bar.png",
-    Health: "../Graphics/Health.png"
+    Health: "../Graphics/Health_Bar.png",
+    Mana: "../Graphics/Mana_Bar.png",
+    Xp: "../Graphics/Xp_Bar.png"
 }
 
 // ============================================================================
@@ -94,7 +95,8 @@ let Player = {
     MaxMana: 1,
     Mana: 1,
     Level: 0,
-    experience: 0,
+    Experience: 0,
+    Requirement: 100,
     // Hidden
     stats: { Strength: 1, Agility: 1, Intelligence: 1, Vitality: 0 },
     points: 0
@@ -241,32 +243,102 @@ let selectedSlot = null;
 // ============================================================================
 
 // Player
-let Hp = {
+let Bar = {
     Health: {
-        location: {x: centerX * 0.45, y: centerY * 1.5},
-        Width: 100,
-        Height: 100,
-        rotation: 45
+        Location: {x: centerX * 0.6, y: centerY * 1.4},
+        Width: 300,
+        Height: 300,
+        Color: 
+            Player.Health === 1 ? "white":
+            Player.Health / Player.MaxHealth <= 0.25 ? "red" :
+            Player.Health / Player.MaxHealth <= 0.5 ? "yellow" :
+            "green",
+        // Shield
+        Shield: {
+            Color: "cyan",
+            Overcharged: {
+                Color: "magenta",
+            }
+        }
     },
-    Bar: {
-        location: {x: centerX * 0.5, y: centerY * 1.5},
-        Width: 400,
-        Height: 100
+    Mana: {
+        Location: {x: centerX * 1.1, y: centerY * 1.4},
+        Width: 300,
+        Height: 300,
+        Color: "blue"
+    },
+    Xp: {
+        Location: {x: centerX * 0.7, y: centerY * 1.6},
+        Width: 600,
+        Height: 300,
+        Color: "lime"
     }
 }
 
 function Healthbar() {
-    ctx.drawImage(images.Bar,
-        Hp.Bar.location.x,
-        Hp.Bar.location.y,
-        Hp.Bar.Width,
-        Hp.Bar.Height,
+    // Liquid Health
+    ctx.globalAlpha = 1
+    ctx.fillStyle = Bar.Health.Color
+    ctx.fillRect(
+        Bar.Health.Location.x * 1.025, 
+        Bar.Health.Location.y * 1.2 , 
+        Bar.Health.Width * 0.9 / (Player.MaxHealth / Player.Health), 
+        Bar.Health.Height * 0.1)
+    // Liquid Shield
+    ctx.globalAlpha = Bar.Health.Shield.Transparency;
+    ctx.fillStyle = Bar.Health.Shield.Color
+    ctx.fillRect(
+        Bar.Health.Location.x * 1.025,
+        Bar.Health.Location.y * 1.2, 
+        Bar.Health.Width * 0.9 * (Player.Shield > Player.MaxHealth ? 1 : Player.Shield / Player.MaxHealth), 
+        Bar.Health.Height * 0.05
     )
+    ctx.globalAlpha = 1;
+    // Liquid OverCharge
+    if (Player.Shield > Player.MaxHealth) {
+        ctx.fillStyle = Bar.Health.Shield.Overcharged.Color
+        ctx.fillRect(
+            Bar.Health.Location.x * 1.025, 
+            Bar.Health.Location.y * 1.2, 
+            Bar.Health.Width * 0.9 * ((Player.Shield - Player.MaxHealth) / Player.MaxHealth > 1 ? 1 : (Player.Shield - Player.MaxHealth) / Player.MaxHealth),
+            Bar.Health.Height * 0.05
+        )
+    }
+    // Bar
     ctx.drawImage(images.Health,
-        Hp.Health.location.x,
-        Hp.Health.location.y,
-        Hp.Health.Width,
-        Hp.Health.Height,
+        Bar.Health.Location.x,
+        Bar.Health.Location.y,
+        Bar.Health.Width,
+        Bar.Health.Height,
+    )
+}
+
+function ManaBar() {
+    // Liquid
+    ctx.fillStyle = Bar.Mana.Color
+    ctx.fillRect(Bar.Mana.Location.x * 1.0475, Bar.Mana.Location.y * 1.18 , Bar.Mana.Width * 0.7 / (Player.MaxMana / Player.Mana), Bar.Mana.Height * 0.2)
+    // Bar
+    ctx.drawImage(images.Mana,
+        Bar.Mana.Location.x,
+        Bar.Mana.Location.y,
+        Bar.Mana.Width,
+        Bar.Mana.Height
+    )
+}
+function XpBar() {
+    // Liquid
+    ctx.fillStyle = Bar.Xp.Color
+    ctx.fillRect(
+        Bar.Xp.Location.x * 1.25, 
+        Bar.Xp.Location.y * 1.175, 
+        Bar.Xp.Width * 0.5 / (Player.Requirement / Player.Experience), 
+        Bar.Xp.Height * 0.1)
+    // Bar
+    ctx.drawImage(images.Xp,
+        Bar.Xp.Location.x,
+        Bar.Xp.Location.y,
+        Bar.Xp.Width,
+        Bar.Xp.Height
     )
 }
 
@@ -277,6 +349,8 @@ function Healthbar() {
 function Draw() {
     CreateBackground()
     Healthbar()
+    ManaBar()
+    XpBar()
 }
 
 // ============================================================================
