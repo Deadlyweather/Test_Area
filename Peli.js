@@ -27,9 +27,11 @@ function CreateBackground() {
 // ============================================================================
 
 let images = {
-    Health: "../Graphics/Health_Bar.png",
-    Mana: "../Graphics/Mana_Bar.png",
-    Xp: "../Graphics/Xp_Bar.png"
+    Health: "../Graphics/UI/Health_Bar.png",
+    Mana: "../Graphics/UI/Mana_Bar.png",
+    Xp: "../Graphics/UI/Xp_Bar.png",
+    Inventory: "../Graphics/UI/Inventory.png",
+    Slot: "../Graphics/UI/Slot.png"
 }
 
 // ============================================================================
@@ -80,6 +82,8 @@ let centerY = canvas.height / 2
 // ============================================================================
 // Custom sizes
 // ============================================================================
+let screenX = canvas.width
+let screenY = canvas.height
 
 // ============================================================================
 // PLAYER
@@ -95,7 +99,7 @@ let Player = {
     MaxMana: 1,
     Mana: 1,
     Level: 0,
-    Experience: 0,
+    Experience: 100,
     Requirement: 100,
     // Hidden
     stats: { Strength: 1, Agility: 1, Intelligence: 1, Vitality: 0 },
@@ -118,7 +122,7 @@ let camera = {
     position: { x: 0, y: 0 },
     screen: { x: centerX, y: centerY },
     offset: { x: 0, y: 0 },
-    maxOffset: 360,
+    maxOffset: 500,
 };
 
 // ============================================================================
@@ -139,10 +143,11 @@ let Keybinds = {
     Ranged: "Mouse1",
     Ranged_Ultimate: "Ctrl",
     Melee: "Mouse2",
-    Melee_ULtimate: "Space",
+    Melee_Ultimate: "Space",
     Dash: "Shift",
     // UI
-    Inventory: "§",
+    Backpack: "§",
+    Scroll: "wheel",
     HotbarKeys: {
         1: "1",
         2: "2",
@@ -160,6 +165,32 @@ let Keybinds = {
     // Info
     Devbook: "p"
 };
+
+// ============================================================================
+// OUTPUT
+// ============================================================================
+
+document.addEventListener("keydown", (pressed) => {
+    if (pressed.key === Keybinds.Backpack) {
+        Inventory();
+    }
+});
+
+document.addEventListener("wheel", (Scrolled) => {
+    if (opened.Backpack = true) {
+        ScrollInventory()
+    }
+});
+
+function Inventory() {
+    if (opened.Backpack === false) {
+        opened.Settings = false
+        opened.Devbook = false
+        opened.Backpack = true
+    } else {
+        opened.Backpack = false
+    }
+}
 
 // ============================================================================
 // WEAPON
@@ -206,16 +237,49 @@ let Dash = {
 }
 
 // ============================================================================
+// WINDOWS
+// ============================================================================
+
+let opened = {
+    Settings: false,
+    Backpack: false,
+    Devbook: false
+}
+
+// ============================================================================
 // ITEMS
 // ============================================================================
 
 let items = {}
 
 // ============================================================================
-// Inventory
+// INVENTORY
 // ============================================================================
 
-let Inventory = {}
+let Backpack = {
+    // Inventory
+    x: centerX * 0.7,
+    y: centerY * 0.1,
+    width: screenY * 0.6,
+    height: screenY * 0.6,
+    
+    // slots
+    SlotX: 8,
+    SlotY: 8,
+    SlotSize: 64,
+    scrollY: 0,
+    GridPos: {x: centerX * 0.7, y: centerY * 0.1},
+    SlotDistance: 8,
+    // items
+    Inventory: []
+}
+
+// ============================================================================
+// SCROLL
+// ============================================================================
+function ScrollInventory() {
+
+}
 
 // ============================================================================
 // Equipment
@@ -245,7 +309,7 @@ let selectedSlot = null;
 // Player
 let Bar = {
     Health: {
-        Location: {x: centerX * 0.6, y: centerY * 1.4},
+        Location: {x: centerX * 0.65, y: centerY * 1.4},
         Width: 300,
         Height: 300,
         Color: 
@@ -262,10 +326,10 @@ let Bar = {
         }
     },
     Mana: {
-        Location: {x: centerX * 1.1, y: centerY * 1.4},
+        Location: {x: centerX * 1.05, y: centerY * 1.4},
         Width: 300,
         Height: 300,
-        Color: "blue"
+        Color: Player.Mana === Player.MaxMana ? "white" : "blue"
     },
     Xp: {
         Location: {x: centerX * 0.7, y: centerY * 1.6},
@@ -329,12 +393,13 @@ function XpBar() {
     // Liquid
     ctx.fillStyle = Bar.Xp.Color
     ctx.fillRect(
-        Bar.Xp.Location.x * 1.25, 
+        Bar.Xp.Location.x * 1.2425, 
         Bar.Xp.Location.y * 1.175, 
-        Bar.Xp.Width * 0.5 / (Player.Requirement / Player.Experience), 
+        Bar.Xp.Width * 0.46 / (Player.Requirement / Player.Experience), 
         Bar.Xp.Height * 0.1)
     // Bar
-    ctx.drawImage(images.Xp,
+    ctx.drawImage(
+        images.Xp,
         Bar.Xp.Location.x,
         Bar.Xp.Location.y,
         Bar.Xp.Width,
@@ -342,6 +407,33 @@ function XpBar() {
     )
 }
 
+function OpenBackpack() {
+    ctx.drawImage(
+        images.Inventory,
+        Backpack.x,
+        Backpack.y,
+        Backpack.width,
+        Backpack.height
+    )
+    Slots()
+}
+function Slots() {
+    for (let i = 0; i < Backpack.SlotY; i++) {
+        const slotX = Backpack.x;
+        const slotY = Backpack.y + i * (Backpack.SlotSize + Backpack.SlotDistance);
+
+        ctx.drawImage(
+            images.Slot,
+            slotX,
+            slotY,
+            Backpack.SlotSize,
+            Backpack.SlotSize
+        );
+    }
+}
+function AddRow() {
+    Backpack.SlotY++;
+}
 // ============================================================================
 // DRAW
 // ============================================================================
@@ -351,6 +443,9 @@ function Draw() {
     Healthbar()
     ManaBar()
     XpBar()
+    if (opened.Backpack === true) {
+        OpenBackpack()
+    }
 }
 
 // ============================================================================
@@ -361,6 +456,9 @@ function Game() {
     requestAnimationFrame(Game)
 }
 
+// ============================================================================
+// START
+// ============================================================================
 loadImages(images).then(loaded => {
     images = loaded;
     Game();

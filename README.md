@@ -3,3 +3,4 @@ Suosittelen tiimin lukemaan mitä olen lisännyt tänne
 Todennäköisesti en saa kunnolla selitettyä mitä yritän saada aikaan joten lisäsin teksti tiedostoon kaiken toiminnan ja minun "vision"
 
 Yritän Erityisiä pelin osia. Mahdollisesti Enemmän "Maailmoja"
+Ja päätin jättää musiikin pois toistaiseksi. En tykännyt omistani
