@@ -31,7 +31,13 @@ let images = {
     Mana: "../Graphics/UI/Mana_Bar.png",
     Xp: "../Graphics/UI/Xp_Bar.png",
     Inventory: "../Graphics/UI/Inventory.png",
-    Slot: "../Graphics/UI/Slot.png"
+    Slot: "../Graphics/UI/Slot.png",
+    Equipment: "../Graphics/UI/Equipment.png",
+    Equipped: "../Graphics/UI/Equipped.png",
+    Empty_Head: "../Graphics/Items/Armor/Empty_Head.png",
+    Empty_Chest: "../Graphics/Items/Armor/Empty_Chest.png",
+    Empty_Legs: "../Graphics/Items/Armor/Empty_Legs.png",
+    Empty_Feet: "../Graphics/Items/Armor/Empty_Feet.png"
 }
 
 // ============================================================================
@@ -147,7 +153,6 @@ let Keybinds = {
     Dash: "Shift",
     // UI
     Backpack: "§",
-    Scroll: "wheel",
     HotbarKeys: {
         1: "1",
         2: "2",
@@ -176,10 +181,10 @@ document.addEventListener("keydown", (pressed) => {
     }
 });
 
-document.addEventListener("wheel", (Scrolled) => {
-    if (opened.Backpack = true) {
-        ScrollInventory()
-    }
+document.addEventListener("wheel", (X) => {
+    if (!opened.Backpack) return;
+
+    ScrollInventory(X.deltaY);
 });
 
 function Inventory() {
@@ -258,17 +263,17 @@ let items = {}
 
 let Backpack = {
     // Inventory
-    x: centerX * 0.7,
-    y: centerY * 0.1,
-    width: screenY * 0.6,
-    height: screenY * 0.6,
+    x: centerX,
+    y: 50,
+    width: 600,
+    height: 600,
     
     // slots
+    GridPos: {x: 0, y: 50},
     SlotX: 8,
     SlotY: 8,
-    SlotSize: 64,
-    scrollY: 0,
-    GridPos: {x: centerX * 0.7, y: centerY * 0.1},
+    SlotSize: 40,
+    RollY: 0,
     SlotDistance: 8,
     // items
     Inventory: []
@@ -277,7 +282,9 @@ let Backpack = {
 // ============================================================================
 // SCROLL
 // ============================================================================
-function ScrollInventory() {
+
+function ScrollInventory(Amount) {
+    Backpack.RollY += Amount
 
 }
 
@@ -417,20 +424,33 @@ function OpenBackpack() {
     )
     Slots()
 }
-function Slots() {
-    for (let i = 0; i < Backpack.SlotY; i++) {
-        const slotX = Backpack.x;
-        const slotY = Backpack.y + i * (Backpack.SlotSize + Backpack.SlotDistance);
 
-        ctx.drawImage(
-            images.Slot,
-            slotX,
-            slotY,
-            Backpack.SlotSize,
-            Backpack.SlotSize
-        );
+function Slots() {
+    for (let plotY = 0; plotY < Backpack.SlotY; plotY++) {
+        for (let plotX = 0; plotX < Backpack.SlotX; plotX++) {
+
+            const slotX =
+                Backpack.x +
+                Backpack.GridPos.x +
+                plotX * (Backpack.SlotSize + Backpack.SlotDistance);
+
+            const slotY =
+                Backpack.y +
+                Backpack.GridPos.y +
+                plotY * (Backpack.SlotSize + Backpack.SlotDistance) +
+                Backpack.RollY;
+
+            ctx.drawImage(
+                images.Slot,
+                slotX,
+                slotY,
+                Backpack.SlotSize,
+                Backpack.SlotSize
+            );
+        }
     }
 }
+
 function AddRow() {
     Backpack.SlotY++;
 }
