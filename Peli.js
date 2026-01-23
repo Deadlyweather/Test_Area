@@ -27,17 +27,38 @@ function CreateBackground() {
 // ============================================================================
 
 let images = {
+    // Bar
     Health: "../Graphics/UI/Health_Bar.png",
     Mana: "../Graphics/UI/Mana_Bar.png",
     Xp: "../Graphics/UI/Xp_Bar.png",
+    // Inventory
     Inventory: "../Graphics/UI/Inventory.png",
     Slot: "../Graphics/UI/Slot.png",
-    Equipment: "../Graphics/UI/Equipment.png",
+    // Armor
+    Empty: "../Graphics/UI/Equipment.png",
     Equipped: "../Graphics/UI/Equipped.png",
     Empty_Head: "../Graphics/Items/Armor/Empty_Head.png",
     Empty_Chest: "../Graphics/Items/Armor/Empty_Chest.png",
     Empty_Legs: "../Graphics/Items/Armor/Empty_Legs.png",
-    Empty_Feet: "../Graphics/Items/Armor/Empty_Feet.png"
+    Empty_Feet: "../Graphics/Items/Armor/Empty_Feet.png",
+    // Devbook
+    Body: "../Graphics/UI/Devbook/Body.png",
+    Close: "../Graphics/UI/Devbook/Close.png",
+    Back: "../Graphics/UI/Devbook/Back.png",
+
+
+    Art: "../Graphics/UI/Devbook/Art.png",
+    Armor: "../Graphics/UI/Devbook/Armor.png",
+    Armor: "../Graphics/UI/Devbook/Armor.png",
+    Armor: "../Graphics/UI/Devbook/Armor.png",
+
+    Item: "../Graphics/UI/Devbook/Item_logs.png",
+
+
+    Stat: "../Graphics/UI/Devbook/Stat_sheet.png"
+
+
+    
 }
 
 // ============================================================================
@@ -176,9 +197,18 @@ let Keybinds = {
 // ============================================================================
 
 document.addEventListener("keydown", (pressed) => {
-    if (pressed.key === Keybinds.Backpack) {
-        Inventory();
+    /*
+    if (pressed.key === Keybinds.) {
+    
     }
+    */
+    if (pressed.key === Keybinds.Backpack) {
+        Inventory()
+    }
+    if (pressed.key === Keybinds.Devbook) {
+        OpenDevbook()
+    }
+
 });
 
 document.addEventListener("wheel", (X) => {
@@ -186,7 +216,15 @@ document.addEventListener("wheel", (X) => {
 
     ScrollInventory(X.deltaY);
 });
-
+/*
+if (opened. === false) {
+        opened.Settings = false
+        opened.Devbook = false
+        opened.Backpack = false
+    } else {
+        opened. = false
+    }
+*/
 function Inventory() {
     if (opened.Backpack === false) {
         opened.Settings = false
@@ -194,6 +232,16 @@ function Inventory() {
         opened.Backpack = true
     } else {
         opened.Backpack = false
+    }
+}
+
+function OpenDevbook() {
+    if (opened.Devbook === false) {
+        opened.Settings = false
+        opened.Devbook = true
+        opened.Backpack = false
+    } else {
+        opened.Devbook = false
     }
 }
 
@@ -252,10 +300,178 @@ let opened = {
 }
 
 // ============================================================================
+// Devbook
+// ============================================================================
+
+let Devbook = {
+    open: false,
+    activeTab: "Art",
+    x: centerX / 1.5,
+    y: centerY / 8,
+    size: 600,
+    scroll: 0,
+
+    tabSize: { w: 128, h: 64 },
+
+    selector: {
+        get x() {
+            return Devbook.x + Devbook.size + 5;
+        },
+        get y() {
+            return Devbook.y;
+        },
+    },
+
+    tabs: [
+        {
+            id: "Art",
+            title: "Art",
+            children: [
+                { id: "Art_Armor", title: "Armor" },
+                { id: "Art_Items", title: "Items" },
+                { id: "Art_Materials", title: "Materials" }
+            ]
+        },
+        {
+            id: "Item",
+            title: "Items",
+            children: [
+                { id: "Items_Consumables", title: "Consumables" },
+                { id: "Items_Materials", title: "Materials" },
+                { id: "Items_Equipment", title: "Equipment" }
+            ]
+        },
+        {
+            id: "Stat",
+            title: "Stats",
+            children: [
+                { id: "Stats_Attributes", title: "Attributes" },
+                { id: "Stats_Combat", title: "Combat" },
+                { id: "Stats_Movement", title: "Movement" }
+            ]
+        }
+    ],
+
+    hitboxes: []
+};
+
+// ============================================================================
+// Update tab hitboxes
+// ============================================================================
+
+function updateDevbookHitboxes() {
+    Devbook.hitboxes = [];
+
+    const startX = Devbook.selector.x;
+    const startY = Devbook.selector.y;
+
+    for (let i = 0; i < Devbook.tabs.length; i++) {
+        const tabY = startY + i * (Devbook.tabSize.h * 0.75);
+
+        Devbook.hitboxes.push({
+            id: Devbook.tabs[i].id,
+            x: startX,
+            y: tabY,
+            width: Devbook.tabSize.w,
+            height: Devbook.tabSize.h
+        });
+    }
+}
+
+// ============================================================================
 // ITEMS
 // ============================================================================
 
-let items = {}
+let items = {
+    Armor: {
+
+        // Tier 0
+
+        Plastic_Helmet: {
+            name: "Plastic Helmet",
+            description: "A flimsy plastic helmet offering minimal protection but great comfort.",
+            image: "../Graphics/Items/Armor/Plastic_Helmet.png",
+            stats: {
+                
+            }
+        },
+
+        Plastic_Chestplate: {
+            name: "Plastic Chestplate",
+            description: "Light plastic plates taped together. Barely protective, but easy to wear.",
+            image: "../Graphics/Items/Armor/Plastic_Chestplate.png",
+            stats: {
+                
+            }
+        },
+
+        Plastic_Greaves: {
+            name: "Plastic Greaves",
+            description: "Plastic leg guards that restrict movement very little.",
+            image: "../Graphics/Items/Armor/Plastic_Greaves.png",
+            stats: {
+                
+            }
+        },
+
+        Plastic_Boots: {
+            name: "Plastic Boots",
+            description: "Flexible plastic boots that are surprisingly comfortable.",
+            image: "../Graphics/Items/Armor/Plastic_Boots.png",
+            stats: {
+                
+            }
+        },
+
+        // TIER 1 
+
+        Board_Helmet: {
+            name: "Board Helmet",
+            description: "A crude helmet made of reinforced wooden boards.",
+            image: "../Graphics/Items/Armor/Board_Helmet.png",
+            stats: {
+                
+            }
+        },
+
+        Board_Chestplate: {
+            name: "Board Chestplate",
+            description: "A rough chestplate built from layered wooden planks.",
+            image: "../Graphics/Items/Armor/Board_Chestplate.png",
+            stats: {
+                
+            }
+        },
+
+        Board_Greaves: {
+            name: "Board Greaves",
+            description: "Wooden leg protection offering minimal coverage.",
+            image: "../Graphics/Items/Armor/Board_Greaves.png",
+            stats: {
+                
+            }
+        },
+
+        Board_Boots: {
+            name: "Board Boots",
+            description: "Heavy wooden boots that slightly slow movement.",
+            image: "../Graphics/Items/Armor/Board_Boots.png",
+            stats: {
+                
+            }
+        }
+    },
+
+
+    Cubes: {
+
+        image: "../Graphics/Items/Armor/Blank_Cube.png"
+    },
+
+    Materials: {
+
+    }
+}
 
 // ============================================================================
 // INVENTORY
@@ -263,18 +479,31 @@ let items = {}
 
 let Backpack = {
     // Inventory
-    x: centerX,
+    x: centerX * 0.75,
     y: 50,
     width: 600,
     height: 600,
     
     // slots
-    GridPos: {x: 0, y: 50},
     SlotX: 8,
     SlotY: 8,
-    SlotSize: 40,
+    SlotSize: 50,
     RollY: 0,
     SlotDistance: 8,
+    get GridPos() {
+        const gridWidth =
+            this.SlotX * this.SlotSize +
+            (this.SlotX - 1) * this.SlotDistance;
+
+        const gridHeight =
+            this.SlotY * this.SlotSize +
+            (this.SlotY - 1) * this.SlotDistance;
+
+        return {
+            x: (this.width - gridWidth) / 2,
+            y: (this.height - gridHeight) / 2
+        }
+    },
     // items
     Inventory: []
 }
@@ -285,7 +514,10 @@ let Backpack = {
 
 function ScrollInventory(Amount) {
     Backpack.RollY += Amount
+}
 
+function ScrollImages(Amount) {
+    Devbook.scroll += Amount
 }
 
 // ============================================================================
@@ -454,6 +686,30 @@ function Slots() {
 function AddRow() {
     Backpack.SlotY++;
 }
+
+function SummonDevPanel() {
+    ctx.drawImage(images.Body, Devbook.x, Devbook.y, Devbook.size, Devbook.size);
+
+    const startX = Devbook.selector.x;
+    const startY = Devbook.selector.y;
+
+    for (let i = 0; i < Devbook.tabs.length; i++) {
+        const tab = Devbook.tabs[i];
+        const tabY = startY + i * (Devbook.tabSize.h * 1.1);
+
+        ctx.drawImage(
+            images[tab.id],
+            startX,
+            tabY,
+            Devbook.tabSize.w,
+            Devbook.tabSize.h
+        );
+    }
+
+    // Päivitä hitboxit joka frame
+    updateDevbookHitboxes();
+}
+
 // ============================================================================
 // DRAW
 // ============================================================================
@@ -463,8 +719,16 @@ function Draw() {
     Healthbar()
     ManaBar()
     XpBar()
+    /*
+    if (opened. === true) {
+        ()
+    }
+    */
     if (opened.Backpack === true) {
         OpenBackpack()
+    }
+    if (opened.Devbook === true) {
+        SummonDevPanel()
     }
 }
 
