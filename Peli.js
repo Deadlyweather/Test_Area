@@ -46,19 +46,21 @@ let images = {
     Close: "../Graphics/UI/Devbook/Close.png",
     Back: "../Graphics/UI/Devbook/Back.png",
 
-
     Art: "../Graphics/UI/Devbook/Art.png",
     Armor: "../Graphics/UI/Devbook/Armor.png",
-    Armor: "../Graphics/UI/Devbook/Armor.png",
-    Armor: "../Graphics/UI/Devbook/Armor.png",
+    Items: "../Graphics/UI/Devbook/Items.png",
+    Stats: "../Graphics/UI/Devbook/Combat.png",
 
     Item: "../Graphics/UI/Devbook/Item_logs.png",
+    Consumeable: "../Graphics/UI/Devbook/Consumeable.png",
+    Materials: "../Graphics/UI/Devbook/Materials.png",
+    Equipment: "../Graphics/UI/Devbook/Equipment.png",
 
+    Stat: "../Graphics/UI/Devbook/Stat_sheet.png",
+    Attributes: "../Graphics/UI/Devbook/Attributes.png",
+    Combat: "../Graphics/UI/Devbook/Combat.png",
+    Movement: "../Graphics/UI/Devbook/Movement.png"
 
-    Stat: "../Graphics/UI/Devbook/Stat_sheet.png"
-
-
-    
 }
 
 // ============================================================================
@@ -188,8 +190,13 @@ let Keybinds = {
     },
     Interact: "e",
     Skills: "l",
+    Confirm: "Enter",
     // Info
-    Devbook: "p"
+    Devbook: "p",
+    // Hitboxes
+    Hitbox: "i",
+    // Commandbar
+    Chat: "t"
 };
 
 // ============================================================================
@@ -208,7 +215,12 @@ document.addEventListener("keydown", (pressed) => {
     if (pressed.key === Keybinds.Devbook) {
         OpenDevbook()
     }
-
+    if (pressed.key === Keybinds.Hitbox) {
+        ToggleHitbox()
+    }
+    if (pressed.key === Keybinds.Chat) {
+        ToggleChat()
+    }
 });
 
 document.addEventListener("wheel", (X) => {
@@ -242,6 +254,67 @@ function OpenDevbook() {
         opened.Backpack = false
     } else {
         opened.Devbook = false
+    }
+}
+
+// section 2
+
+function ToggleHitbox() {
+    if (opened.Hitboxes === false) {
+        opened.Hitboxes = true
+    } else {
+        opened.Hitboxes = false
+    }
+}
+function ToggleChat() {
+    if (opened.Chat === false) {
+        opened.Chat = true
+    } else {
+        opened.Chat = false
+    }
+}
+
+// ============================================================================
+// Hitboxes
+// ============================================================================
+
+let Hitbox = {
+    Hitboxes: [],
+    Tags: {
+        Collision: false,
+        UI: false,
+        Interactable: false
+    },
+}
+
+function SpawnHitbox(x, y, width, height, tags = [] ) {
+    if (Chat.hitbox.Tags.includes("UI")) {
+        Hitbox.Hitboxes.push({
+            x,
+            y,
+            width,
+            height,
+            Tags: tags
+        })
+    }
+}
+
+// ============================================================================
+// Chat
+// ============================================================================
+
+let Chat = {
+    open: false,
+    input: "",
+    messages: [],
+    user: "Deadlyweather",
+    scroll: 0,
+    hitbox: {
+        x: 0,
+        y: 0,
+        width: 400,
+        height: 400,
+        Tags: ["UI"]
     }
 }
 
@@ -296,7 +369,9 @@ let Dash = {
 let opened = {
     Settings: false,
     Backpack: false,
-    Devbook: false
+    Devbook: false,
+    Hitboxes: false,
+    Chat: false,
 }
 
 // ============================================================================
@@ -326,7 +401,7 @@ let Devbook = {
         {
             id: "Art",
             title: "Art",
-            children: [
+            tabs: [
                 { id: "Art_Armor", title: "Armor" },
                 { id: "Art_Items", title: "Items" },
                 { id: "Art_Materials", title: "Materials" }
@@ -335,7 +410,7 @@ let Devbook = {
         {
             id: "Item",
             title: "Items",
-            children: [
+            tabs: [
                 { id: "Items_Consumables", title: "Consumables" },
                 { id: "Items_Materials", title: "Materials" },
                 { id: "Items_Equipment", title: "Equipment" }
@@ -344,7 +419,7 @@ let Devbook = {
         {
             id: "Stat",
             title: "Stats",
-            children: [
+            tabs: [
                 { id: "Stats_Attributes", title: "Attributes" },
                 { id: "Stats_Combat", title: "Combat" },
                 { id: "Stats_Movement", title: "Movement" }
@@ -354,29 +429,6 @@ let Devbook = {
 
     hitboxes: []
 };
-
-// ============================================================================
-// Update tab hitboxes
-// ============================================================================
-
-function updateDevbookHitboxes() {
-    Devbook.hitboxes = [];
-
-    const startX = Devbook.selector.x;
-    const startY = Devbook.selector.y;
-
-    for (let i = 0; i < Devbook.tabs.length; i++) {
-        const tabY = startY + i * (Devbook.tabSize.h * 0.75);
-
-        Devbook.hitboxes.push({
-            id: Devbook.tabs[i].id,
-            x: startX,
-            y: tabY,
-            width: Devbook.tabSize.w,
-            height: Devbook.tabSize.h
-        });
-    }
-}
 
 // ============================================================================
 // ITEMS
@@ -518,6 +570,10 @@ function ScrollInventory(Amount) {
 
 function ScrollImages(Amount) {
     Devbook.scroll += Amount
+}
+
+function ScrollChat(Amount) {
+    Chat.scroll += Amount
 }
 
 // ============================================================================
@@ -705,9 +761,6 @@ function SummonDevPanel() {
             Devbook.tabSize.h
         );
     }
-
-    // Päivitä hitboxit joka frame
-    updateDevbookHitboxes();
 }
 
 // ============================================================================
@@ -729,6 +782,12 @@ function Draw() {
     }
     if (opened.Devbook === true) {
         SummonDevPanel()
+    }
+    if (opened.Hitboxes === true) {
+        ShowHitboxes()
+    }
+    if (opened.Chat === true) {
+        ActivateChat()
     }
 }
 
