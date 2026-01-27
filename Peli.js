@@ -90,6 +90,83 @@ function loadImages(imageList) {
 }
 
 // ============================================================================
+// Fonts
+// ============================================================================
+
+const FontsList = {
+  Player: {
+    src: "../Graphics/Fonts/Orange_Text.png",
+    chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`,
+    size: 8
+  },
+
+  Enemy: {
+    src: "../Graphics/Fonts/Orange_Text.png",
+    chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`,
+    size: 8
+  },
+
+  Info: {
+    src: "../Graphics/Fonts/Orange_Text.png",
+    chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`,
+    size: 8
+  },
+
+  Deadlyweather: {
+    src: "../Graphics/Fonts/Orange_Text.png",
+    chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`,
+    size: 16
+  }
+};
+
+function loadFont(fontName) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.src = FontsList[fontName].src;
+
+    img.onload = () => {
+      FontsList[fontName].image = img;
+      resolve();
+    };
+
+    img.onerror = () => {
+      reject(new Error("Font failed to load: " + FontsList[fontName].src));
+    };
+  });
+}
+
+function loadFonts() {
+  const fontNames = Object.keys(FontsList);
+  return Promise.all(fontNames.map(name => loadFont(name)));
+}
+
+function drawText(ctx, fontName, text, x, y, scale = 1) {
+  const font = FontsList[fontName];
+  if (!font || !font.image) return;
+
+  const size = font.size;
+  const lines = text.split("\n");
+
+  for (let l = 0; l < lines.length; l++) {
+    const line = lines[l];
+
+    for (let i = 0; i < line.length; i++) {
+      const idx = font.chars.indexOf(line[i]);
+      if (idx === -1) continue;
+
+      ctx.drawImage(
+        font.image,
+        idx * size, 0,
+        size, size,
+        x + i * size * scale,
+        y + l * size * scale,
+        size * scale, size * scale
+      );
+    }
+  }
+}
+
+// ============================================================================
 // TIME
 // ============================================================================
 
@@ -237,6 +314,7 @@ if (opened. === false) {
         opened. = false
     }
 */
+
 function Inventory() {
     if (opened.Backpack === false) {
         opened.Settings = false
@@ -767,11 +845,19 @@ function SummonDevPanel() {
 // DRAW
 // ============================================================================
 
+function drawGameTexts() {
+  for (const t of gameTexts) {
+    drawText(ctx, t.font, t.text, t.x, t.y, t.scale);
+  }
+}
+
 function Draw() {
     CreateBackground()
     Healthbar()
     ManaBar()
     XpBar()
+    drawGameTexts();
+    
     /*
     if (opened. === true) {
         ()
@@ -789,6 +875,8 @@ function Draw() {
     if (opened.Chat === true) {
         ActivateChat()
     }
+
+    drawText(ctx, "Player", "HELLO WORLD", 50, 50, 2);
 }
 
 // ============================================================================
@@ -802,9 +890,15 @@ function Game() {
 // ============================================================================
 // START
 // ============================================================================
-loadImages(images).then(loaded => {
+
+loadImages(images)
+  .then(loaded => {
     images = loaded;
+    return loadFonts();
+  })
+  .then(() => {
     Game();
-}).catch(err => {
+  })
+  .catch(err => {
     console.error(err);
-});
+  });
