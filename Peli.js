@@ -101,19 +101,19 @@ const FontsList = {
   },
 
   Enemy: {
-    src: "../Graphics/Fonts/Orange_Text.png",
+    src: "../Graphics/Fonts/Red_Text.png",
     chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`,
     size: 8
   },
 
   Info: {
-    src: "../Graphics/Fonts/Orange_Text.png",
+    src: "../Graphics/Fonts/Info_Text.png",
     chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`,
     size: 8
   },
 
   Deadlyweather: {
-    src: "../Graphics/Fonts/Orange_Text.png",
+    src: "../Graphics/Fonts/Deadlyweather_Text.png",
     chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`,
     size: 16
   }
@@ -130,7 +130,8 @@ function loadFont(fontName) {
     };
 
     img.onerror = () => {
-      reject(new Error("Font failed to load: " + FontsList[fontName].src));
+      console.warn("Font failed to load (skipping): " + FontsList[fontName].src);
+      resolve();
     };
   });
 }
@@ -142,7 +143,15 @@ function loadFonts() {
 
 function drawText(ctx, fontName, text, x, y, scale = 1) {
   const font = FontsList[fontName];
-  if (!font || !font.image) return;
+
+  if (!font || !font.image) {
+    ctx.save();
+    ctx.fillStyle = "red"; 
+    ctx.font = `${16 * scale}px Arial`;
+    ctx.fillText(text, x, y + 16 * scale);
+    ctx.restore();
+    return;
+  }
 
   const size = font.size;
   const lines = text.split("\n");
@@ -875,9 +884,8 @@ function Draw() {
     if (opened.Chat === true) {
         ActivateChat()
     }
-
-    drawText(ctx, "Player", "HELLO WORLD", 50, 50, 2);
 }
+drawText(ctx, "Player", "HELLO WORLD", 50, 50, 2);
 
 // ============================================================================
 // GAME
@@ -891,14 +899,12 @@ function Game() {
 // START
 // ============================================================================
 
-loadImages(images)
-  .then(loaded => {
-    images = loaded;
-    return loadFonts();
-  })
-  .then(() => {
-    Game();
-  })
-  .catch(err => {
-    console.error(err);
-  });
+Promise.all([
+  loadImages(images),
+  loadFonts()
+]).then(([loadedImages]) => {
+  images = loadedImages;
+  Game();
+}).catch(err => {
+  console.error(err);
+});
