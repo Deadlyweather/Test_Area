@@ -25,53 +25,82 @@ const graphics = {
 
 const imageAssets = {
     bars: {
-        Health: "../Graphics/UI/Health_Bar.png",
-        Mana: "../Graphics/UI/Mana_Bar.png",
-        Xp: "../Graphics/UI/Xp_Bar.png"
+        Health: "./Graphics/UI/Health_Bar.png",
+        Mana: "./Graphics/UI/Mana_Bar.png",
+        Xp: "./Graphics/UI/Xp_Bar.png"
     },
     inventory: {
-        Inventory: "../Graphics/UI/Inventory.png",
-        Slot: "../Graphics/UI/Slot.png"
+        Inventory: "./Graphics/UI/Inventory.png",
+        Slot: "./Graphics/UI/Slot.png"
     },
     armor: {
-        Empty: "../Graphics/UI/Equipment.png",
-        Equipped: "../Graphics/UI/Equipped.png",
-        Empty_Head: "../Graphics/Items/Armor/Empty_Head.png",
-        Empty_Chest: "../Graphics/Items/Armor/Empty_Chest.png",
-        Empty_Legs: "../Graphics/Items/Armor/Empty_Legs.png",
-        Empty_Feet: "../Graphics/Items/Armor/Empty_Feet.png"
+        Empty: "./Graphics/UI/Equipment.png",
+        Equipped: "./Graphics/UI/Equipped.png",
+        Empty_Head: "./Graphics/Items/Armor/Empty_Head.png",
+        Empty_Chest: "./Graphics/Items/Armor/Empty_Chest.png",
+        Empty_Legs: "./Graphics/Items/Armor/Empty_Legs.png",
+        Empty_Feet: "./Graphics/Items/Armor/Empty_Feet.png",
+        Board_Boots: "./Graphics/Items/Armor/Board_Boots.png",
+        Board_Chestplate: "./Graphics/Items/Armor/Board_Chestplate.png",
+        Board_Greaves: "./Graphics/Items/Armor/Board_Greaves.png",
+        Board_Helmet: "./Graphics/Items/Armor/Board_Helmet.png",
+        Plastic_Boots: "./Graphics/Items/Armor/Plastic_Boots.png",
+        Plastic_Chestplate: "./Graphics/Items/Armor/Plastic_Chestplate.png",
+        Plastic_Greaves: "./Graphics/Items/Armor/Plastic_Greaves.png",
+        Plastic_Helmet: "./Graphics/Items/Armor/Plastic_Helmet.png"
     },
     devbook: {
-        Body: "../Graphics/UI/Devbook/Body.png",
-        Close: "../Graphics/UI/Devbook/Close.png",
-        Back: "../Graphics/UI/Devbook/Back.png",
-        Art: "../Graphics/UI/Devbook/Art.png",
-        Armor: "../Graphics/UI/Devbook/Armor.png",
-        Items: "../Graphics/UI/Devbook/Items.png",
-        Stats: "../Graphics/UI/Devbook/Combat.png",
-        Item: "../Graphics/UI/Devbook/Item_logs.png",
-        Consumeable: "../Graphics/UI/Devbook/Consumeable.png",
-        Materials: "../Graphics/UI/Devbook/Materials.png",
-        Equipment: "../Graphics/UI/Devbook/Equipment.png",
-        Stat: "../Graphics/UI/Devbook/Stat_sheet.png",
-        Attributes: "../Graphics/UI/Devbook/Attributes.png",
-        Combat: "../Graphics/UI/Devbook/Combat.png",
-        Movement: "../Graphics/UI/Devbook/Movement.png",
-        Home: "../Graphics/UI/Devbook/Body.png",
-        List: "../Graphics/UI/Devbook/Item_logs.png"
+        Body: "./Graphics/UI/Devbook/Body.png",
+        Close: "./Graphics/UI/Devbook/Close.png",
+        Back: "./Graphics/UI/Devbook/Back.png",
+        Art: "./Graphics/UI/Devbook/Art.png",
+        Armor: "./Graphics/UI/Devbook/Armor.png",
+        Items: "./Graphics/UI/Devbook/Items.png",
+        Stats: "./Graphics/UI/Devbook/Combat.png",
+        Item: "./Graphics/UI/Devbook/Item_logs.png",
+        Consumeable: "./Graphics/UI/Devbook/Consumeable.png",
+        Materials: "./Graphics/UI/Devbook/Materials.png",
+        Equipment: "./Graphics/UI/Devbook/Equipment.png",
+        Stat: "./Graphics/UI/Devbook/Stat_sheet.png",
+        Attributes: "./Graphics/UI/Devbook/Attributes.png",
+        Combat: "./Graphics/UI/Devbook/Combat.png",
+        Movement: "./Graphics/UI/Devbook/Movement.png",
+        Home: "./Graphics/UI/Devbook/Body.png",
+        List: "./Graphics/UI/Devbook/Item_logs.png"
     },
     cubes: {
-        Blank_Cube: "../Graphics/Items/Cubes/Blank_Cube.png",
-        Brawn_Cube: "../Graphics/Items/Cubes/Brawn_Cube.png",
-        Haste_Cube: "../Graphics/Items/Cubes/Haste_Cube.png",
-        Heal_Cube: "../Graphics/Items/Cubes/Heal_Cube.png",
-        Health_Cube: "../Graphics/Items/Cubes/Health_Cube.png",
-        Mana_Cube: "../Graphics/Items/Cubes/Mana_Cube.png",
-        Mighty_Cube: "../Graphics/Items/Cubes/Mighty_Cube.png",
-        Shield_Cube: "../Graphics/Items/Cubes/Shield_Cube.png",
-        Tough_Cube: "../Graphics/Items/Cubes/Tough_Cube.png",
-        Vital_Cube: "../Graphics/Items/Cubes/Vital_Cube.png",
-        Wise_Cube: "../Graphics/Items/Cubes/Wise_Cube.png"
+        Blank_Cube: "./Graphics/Items/Cubes/Blank_Cube.png",
+
+        Health_Cube: "./Graphics/Items/Cubes/Health_Cube.png",
+
+        Heal_Cube: "./Graphics/Items/Cubes/Heal_Cube.png",
+        Mana_Cube: "./Graphics/Items/Cubes/Mana_Cube.png",
+        Shield_Cube: "./Graphics/Items/Cubes/Shield_Cube.png",
+
+
+        Brawn_Cube: "./Graphics/Items/Cubes/Brawn_Cube.png",
+        Haste_Cube: "./Graphics/Items/Cubes/Haste_Cube.png",
+        Vital_Cube: "./Graphics/Items/Cubes/Vital_Cube.png",
+        Wise_Cube: "./Graphics/Items/Cubes/Wise_Cube.png",
+        
+        Mighty_Cube: "./Graphics/Items/Cubes/Mighty_Cube.png",
+        Tough_Cube: "./Graphics/Items/Cubes/Tough_Cube.png"
+        
+    },
+    materials: {
+        Ascended_Soul: "./Graphics/Items/Materials/Ascended_Soul.png",
+        Blue_Steel: "./Graphics/Items/Materials/Blue_Steel.png",
+        Corrupted_Soul: "./Graphics/Items/Materials/Corrupted_Soul.png",
+        Crystal: "./Graphics/Items/Materials/Crystal.png",
+        Iron: "./Graphics/Items/Materials/Iron.png",
+        Mighty_Soul: "./Graphics/Items/Materials/Mighty_Soul.png",
+        Mythril: "./Graphics/Items/Materials/Mythril.png",
+        Plastic: "./Graphics/Items/Materials/Plastic.png",
+        Rock: "./Graphics/Items/Materials/Rock.png",
+        Soul: "./Graphics/Items/Materials/Soul.png",
+        Steel: "./Graphics/Items/Materials/Steel.png",
+        Void_Iron: "./Graphics/Items/Materials/Void_Iron.png",
+        Void_wood: "./Graphics/Items/Materials/Void_wood.png"
     }
 };
 
@@ -209,10 +238,10 @@ const ImageLoader = {
 
 const FontManager = {
     fonts: {
-        Player: { src: "../Graphics/Fonts/Orange_Text.png", chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`, size: 8 },
-        Enemy: { src: "../Graphics/Fonts/Red_Text.png", chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`, size: 8 },
-        Info: { src: "../Graphics/Fonts/Info_Text.png", chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`, size: 8 },
-        Deadlyweather: { src: "../Graphics/Fonts/Deadlyweather_Text.png", chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`, size: 16 }
+        Player: { src: "./Graphics/Fonts/Orange_Text.png", chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`, size: 8 },
+        Enemy: { src: "./Graphics/Fonts/Red_Text.png", chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`, size: 8 },
+        Info: { src: "./Graphics/Fonts/Info_Text.png", chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`, size: 8 },
+        Deadlyweather: { src: "./Graphics/Fonts/Deadlyweather_Text.png", chars: ` !"#$&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖ[]^_'~`, size: 16 }
     },
 
     loadFont(fontName) {
@@ -342,6 +371,78 @@ function drawRichText(ctx, fontName, text, x, y, scale = 1) {
     }
 }
 
+function getLineHeightWithIcons(fontName, line, baseLineHeight, scale = 1) {
+    const font = FontManager.fonts[fontName];
+    const size = (font?.size || 8) * scale;
+
+    const matches = [...line.matchAll(/\{([^}]+)\}/g)];
+    if (matches.length === 0) return baseLineHeight;
+
+    let maxIconScale = 1;
+
+    for (const m of matches) {
+        const inside = m[1].trim();
+        const parts = inside.split(",").map(s => s.trim());
+        const iconScale = parts[1] ? parseFloat(parts[1]) : 1;
+
+        if (!isNaN(iconScale)) {
+            maxIconScale = Math.max(maxIconScale, iconScale);
+        }
+    }
+
+    const iconHeight = size * maxIconScale;
+
+    return Math.max(baseLineHeight, iconHeight + 4);
+}
+
+function parseRichParts(line) {
+    // Palauttaa arrayn jossa on joko {type:"text", value:"..."} tai {type:"icon", name:"...", scale:1}
+    const parts = line.split(/(\{[^}]+\})/g).filter(Boolean);
+
+    return parts.map(p => {
+        if (p.startsWith("{") && p.endsWith("}")) {
+            const inside = p.slice(1, -1).trim();
+            const [rawName, rawScale] = inside.split(",").map(s => s.trim());
+
+            return {
+                type: "icon",
+                name: rawName,
+                scale: rawScale ? parseFloat(rawScale) : 1
+            };
+        }
+
+        return { type: "text", value: p };
+    });
+}
+
+function measureRichLine(fontName, line, scale = 1) {
+    const font = FontManager.fonts[fontName];
+    const size = (font?.size || 8) * scale;
+
+    let width = 0;
+    let maxHeight = size;
+
+    const parts = parseRichParts(line);
+
+    for (const part of parts) {
+        if (part.type === "text") {
+            // bitmap-fontissa jokainen merkki = size leveä
+            width += part.value.length * size;
+            maxHeight = Math.max(maxHeight, size);
+        } else if (part.type === "icon") {
+            const iconScale = isNaN(part.scale) ? 1 : part.scale;
+            const iconSize = size * iconScale;
+
+            width += iconSize;
+            maxHeight = Math.max(maxHeight, iconSize);
+        }
+    }
+
+    return { width, height: maxHeight, baseCharSize: size };
+}
+
+
+
 // Alias for compatibility
 const drawText = (ctx, fontName, text, x, y, scale = 1) => FontManager.drawText(ctx, fontName, text, x, y, scale);
 
@@ -446,7 +547,7 @@ const devbook = {
     tabGap: 25,
 
     scroll: 0,
-    scrollSpeed: 20,
+    scrollSpeed: 50,
 
     activeTab: "Main",
     activeSubTab: null,
@@ -475,7 +576,7 @@ const devbook = {
             x: this.x * 1.1 + this.padding ,
             y: this.y + this.padding + this.headerHeight,
             w: this.size - this.padding * 2,
-            h: this.size - (this.padding * 2 + this.headerHeight)
+            h: (this.size - (this.padding * 2 + this.headerHeight)) * 0.925
         };
     },
 
@@ -522,9 +623,196 @@ const devbook = {
         ],
 
         Art: [
+            "====================",
+            "BLANK CUBE",
+            "{Blank_Cube, 15}",
+            "Base of every cube",
+
+            "====================",
             "HEALTH CUBE",
             "{Health_Cube, 15}",
-            "A dangerous cube that has something valuable inside."
+            "Cube corrupted by malicious magic",
+            "I made it evil because i wanted to encourage risky playstyle.",
+
+            "====================",
+            "HEAL CUBE",
+            "{Heal_Cube, 15}",
+            "Cube infused with souls.",
+            "I created this to be a multipurpose item.",
+
+            "====================",
+            "MANA CUBE",
+            "{Mana_Cube, 15}",
+            "Cube infused with souls and your energy",
+            "Its purpose is to be a backup item.",
+
+            "====================",
+            "SHIELD CUBE",
+            "{Shield_Cube, 15}",
+            "Cube transformed into new form",
+            "Purpose is similiar to Mana Cube, but for defense",
+
+            "====================",
+            "MIGHTY CUBE",
+            "{Mighty_Cube, 15}",
+            "Combination of 4 different types of main cubes.",
+            "This is a reward for players that save up",
+            "and take the risk of dying.",
+
+            "====================",
+            "BRAWN CUBE",
+            "{Brawn_Cube, 15}",
+            "Cube infused with powerful souls.",
+            "item that likely will be a difficult one to balance.",
+
+            "====================",
+            "HASTE CUBE",
+            "{Haste_Cube, 15}",
+            "Cube infused with powerful souls.",
+            "I have to figure out how to make users",
+            "less likely to exploit this item.",
+
+            "====================",
+            "VITAL CUBE",
+            "{Vital_Cube, 15}",
+            "Cube infused with powerful souls.",
+            "Probably the core of tank builds and chase for immortality.",
+
+            "====================",
+            "WISE CUBE",
+            "{Wise_Cube, 15}",
+            "Cube infused with powerful souls.",
+            "Even more difficult to balance than Brawn Cube.",
+
+            "====================",
+            "TOUGH CUBE",
+            "{Tough_Cube, 15}",
+            "Combination of 4 different types of attribute cubes.",
+            "This is a reward for players that save up",
+            "and take the risk of falling behind in progression.",
+
+            "====================",
+            "PLASTIC HELMET",
+            "{Plastic_Helmet, 15}",
+            "Sort of comfortable headgear.",
+            "I wanted to start the armor with no losses",
+            "so players will have an easy start.",
+
+            "====================",
+            "PLASTIC CHESTPLATE",
+            "{Plastic_Chestplate, 15}",
+            "Sort of comfortable chestplate.",
+            "I also wanted armor to be less powerful",
+            "so players would not feel forced to wear it.",
+
+            "====================",
+            "PLASTIC GREAVES",
+            "{Plastic_Greaves, 15}",
+            "Sort of comfortable greaves.",
+            "Then i chose to make them also cheaper",
+            "to encourage players to wear them first.",
+
+            "====================",
+            "PLASTIC BOOTS",
+            "{Plastic_Boots, 15}",
+            "Sort of comfortable boots.",
+            "Armor ofcourse is a powerful stat to have",
+            "so just having low number of it isn't bad either.",
+
+            "====================",
+            "BOARD HELMET",
+            "{Board_Helmet, 15}",
+            "Skull breaker.",
+            "Felt like making a wooden armor would be a funny idea.",
+
+            "====================",
+            "BOARD CHESTPLATE",
+            "{Board_Chestplate, 15}",
+            "Bane of your torso.",
+            "But this has purpose of being also incredibly powerful",
+            "for defence to encourage standing and fighting.",
+
+            "====================",
+            "BOARD GREAVES",
+            "{Board_Greaves, 15}",
+            "Violator of legs.",
+            "The idea behind armor is to make players forfeit their mobility",
+            "to focus on fighting.",
+
+            "====================",
+            "BOARD BOOTS",
+            "{Board_Boots, 15}",
+            "Heel Harbinger.",
+            "I also made wooden armor to be very expensive",
+            "to make sure players only get it when they are ready.",
+
+            "====================",
+            "VOID WOOD",
+            "{Void_wood, 15}",
+            "I decided to grow a garden in void. .-.",
+
+            "====================",
+            "PLASTIC",
+            "{Plastic, 15}",
+            "I also decided to throw trash in the void to mix things up.",
+
+            "====================",
+            "ROCK",
+            "{Rock, 15}",
+            "Literal meteorite from space named rock",
+
+            "====================",
+            "CRYSTAL",
+            "{Crystal, 15}",
+            "Its a crystal, what more is there to say?",
+
+            "====================",
+            "IRON",
+            "{Iron, 15}",
+            "Iron exists in void because i say so.",
+
+            "====================",
+            "STEEL",
+            "{Steel, 15}",
+            "Just better iron.",
+
+            "====================",
+            "BLUE STEEL",
+            "{Blue_Steel, 15}",
+            "Steel infused with smurfs. Take that papa smurf!",
+
+            "====================",
+            "MYTHRIL",
+            "{Mythril, 15}",
+            "I also added mythril just because its cool.",
+
+            "====================",
+            "VOID IRON",
+            "{Void_Iron, 15}",
+            "I also made a better version of iron that already exists in void",
+
+            "====================",
+            "SOUL",
+            "{Soul, 15}",
+            "Theres some souls you have to steal for survival.",
+
+            "====================",
+            "ASCENDED SOUL",
+            "{Ascended_Soul, 15}",
+            "For some reason souls can ascend in void back into void",
+
+            "====================",
+            "MIGHTY SOUL",
+            "{Mighty_Soul, 15}",
+            "Souls that for some reason i chose they can be mighty",
+            "Truth is its just a title",
+            "Pretend it makes sense",
+
+            "====================",
+            "CORRUPTED SOUL",
+            "{Corrupted_Soul, 15}",
+            "Exists because some just cant handle the smoke",
+            "and some random magic thingies i made up"
         ],
 
         Item: {
@@ -586,7 +874,11 @@ function getDevbookScrollBounds() {
     const area = devbook.contentArea;
     const lines = getDevbookLines();
 
-    const contentHeight = lines.length * devbook.lineHeight;
+    let contentHeight = 0;
+
+    for (let i = 0; i < lines.length; i++) {
+        contentHeight += getLineHeightWithIcons("Player", lines[i], devbook.lineHeight, 1);
+    }
 
     if (contentHeight <= area.h) {
         return { min: 0, max: 0 };
@@ -692,8 +984,15 @@ const DevbookRenderer = {
         ctx.rect(area.x, area.y, area.w, area.h);
         ctx.clip();
 
+        let cursorY = area.y + devbook.scroll;
+
         for (let i = 0; i < lines.length; i++) {
-            drawRichText(ctx, "Player", lines[i], area.x, area.y + i * devbook.lineHeight + devbook.scroll, 1);
+            const line = lines[i];
+
+            drawRichText(ctx, "Player", line, area.x, cursorY, 1);
+
+            const lineH = getLineHeightWithIcons("Player", line, devbook.lineHeight, 1);
+            cursorY += lineH;
         }
 
         ctx.restore();
